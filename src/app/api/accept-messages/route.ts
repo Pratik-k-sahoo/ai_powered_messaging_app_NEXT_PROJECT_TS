@@ -42,14 +42,25 @@ export async function POST(request: Request) {
 			);
 		}
 
-		return Response.json(
-			{
-				message: "Updated user status successfully to accept messages.",
-				success: true,
-				updatedUser,
-			},
-			{ status: 200 }
-		);
+		if(acceptMessages) {
+      return Response.json(
+				{
+					message: "Updated user status successfully to accept messages.",
+					success: true,
+					updatedUser,
+				},
+				{ status: 200 }
+			);
+    } else {
+      return Response.json(
+				{
+					message: "Updated user status successfully to not accept messages.",
+					success: true,
+					updatedUser,
+				},
+				{ status: 200 }
+			);
+    }
 	} catch (error) {
 		console.error("Failed to update user status to accept messages: ", error);
 		return Response.json(
